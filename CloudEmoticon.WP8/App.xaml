@@ -1,0 +1,31 @@
+﻿<Application
+    x:Class="CloudEmoticon.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:my="clr-namespace:CloudEmoticon" >
+
+    <!--Application Resources-->
+    <Application.Resources>
+        <local:LocalizedStrings xmlns:local="clr-namespace:CloudEmoticon" x:Key="LocalizedStrings"/>
+        <my:CopyCommand x:Key="CopyCommand"/>
+        <my:EditCommand x:Key="EditCommand" />
+        <my:PinCommand x:Key="PinCommand" />
+        <my:AddFavoriteCommand x:Key="AddFavoriteCommand"/>
+        <my:RemoveFavoriteCommand x:Key="RemoveFavoriteCommand" />
+        <my:RemoveRepositoryCommand x:Key="RemoveRepositoryCommand" />
+        <my:RefreshDataCommand x:Key="RefreshDataCommand" />
+        <my:RateCommand x:Key="RateCommand" />
+        <my:FeedbackCommand x:Key="FeedbackCommand" />
+        <my:EnableToVisibilityConverter x:Key="EnableToVisibilityConverter"/>
+    </Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--Required object that handles lifetime events for the application-->
+        <shell:PhoneApplicationService
+            Launching="Application_Launching" Closing="Application_Closing"
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    </Application.ApplicationLifetimeObjects>
+
+</Application>

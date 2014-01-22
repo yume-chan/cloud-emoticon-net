@@ -1,0 +1,118 @@
+﻿<lib:AppPage
+    x:Class="CloudEmoticon.SettingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lib="clr-namespace:Simon.Library.Controls"
+    xmlns:cmd="clr-namespace:NaveenDhaka"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <lib:AppPage.Resources>
+        <DataTemplate x:Key="ItemTemplate">
+            <Border 
+                BorderBrush="{StaticResource PhoneBorderBrush}"
+                BorderThickness="0,0,0,5">
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu
+                        cmd:CommandExecuter.OnEvent="Opened"
+                        cmd:CommandExecuter.Command="{StaticResource RefreshDataCommand}"
+                        cmd:CommandExecuter.CommandParameter="{Binding RelativeSource={RelativeSource Self}}" >
+                        <toolkit:MenuItem 
+                            Header="{Binding LocalizedResources.Remove, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}" 
+                            Command="{StaticResource RemoveRepositoryCommand}"
+                            CommandParameter="{Binding URL}"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+                <Grid Background="Transparent">
+                    <TextBlock Text="{Binding Info}" FontFamily="Segoe UI Symbol" FontSize="30" Margin="15,15,0,25"/>
+                    <TextBlock Text="{Binding URL}"
+                               Margin="15,0,0,0" FontSize="24" VerticalAlignment="Bottom"  HorizontalAlignment="Left"
+                               FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                               Foreground="{StaticResource PhoneDisabledBrush}" />
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </lib:AppPage.Resources>
+
+    <phone:Pivot
+        x:Name="pivot"
+        Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
+        Margin="0,-18,0,0">
+        <phone:PivotItem Margin="0">
+            <phone:PivotItem.Header>
+                <TextBlock 
+                    Text="{Binding LocalizedResources.Settings, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
+                    FontSize="44"/>
+            </phone:PivotItem.Header>
+            <Grid>
+                <Grid x:Name="ListEmptyLabel" Grid.Row="1" Margin="35,0" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        VerticalAlignment="Center" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Center"
+                        Text="{Binding LocalizedResources.NoRepositories, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
+                    <Button 
+                        Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Padding="40,8"
+                        Content="{Binding LocalizedResources.OK, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                        Tap="LoadButton_Tap"/>
+                </Grid>
+                <phone:LongListSelector
+                    x:Name="ResponsitoriesSelector" Grid.Row="1" Margin="12,0,12,0" ItemTemplate="{StaticResource ItemTemplate}"/>
+            </Grid>
+        </phone:PivotItem>
+        <phone:PivotItem Margin="0">
+            <phone:PivotItem.Header>
+                <TextBlock 
+                    Text="{Binding LocalizedResources.About, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
+                    FontSize="44"/>
+            </phone:PivotItem.Header>
+            <StackPanel>
+                <TextBlock 
+                    Text="Project &amp; Android version:" Margin="0,30,0,0"
+                    FontSize="{StaticResource PhoneFontSizeLarge}" HorizontalAlignment="Center"/>
+                <TextBlock
+                    Text="Kanade Tachibana" Margin="0,20,0,0"
+                    FontSize="{StaticResource PhoneFontSizeMediumLarge}" HorizontalAlignment="Center" />
+                <TextBlock 
+                    Text="Windows Phone version:" Margin="0,30,0,0"
+                    FontSize="{StaticResource PhoneFontSizeLarge}" HorizontalAlignment="Center" />
+                <TextBlock
+                    Text="Simon Chan" Margin="0,20,0,0"
+                    FontSize="{StaticResource PhoneFontSizeMediumLarge}" HorizontalAlignment="Center" />
+                <TextBlock 
+                    Text="iOS version:" Margin="0,30,0,0"
+                    FontSize="{StaticResource PhoneFontSizeLarge}" HorizontalAlignment="Center" />
+                <TextBlock
+                    Text="Yashi Kagurazaka" Margin="0,20,0,0"
+                    FontSize="{StaticResource PhoneFontSizeMediumLarge}" HorizontalAlignment="Center" />
+                <HyperlinkButton 
+                    Content="Rate app in store" Margin="0,50,0,0" FontSize="{StaticResource PhoneFontSizeMediumLarge}" 
+                    cmd:CommandExecuter.OnEvent="Tap" cmd:CommandExecuter.Command="{StaticResource RateCommand}"/>
+                <HyperlinkButton 
+                    Content="Feedback" Margin="0,30,0,0" FontSize="{StaticResource PhoneFontSizeMediumLarge}" 
+                    cmd:CommandExecuter.OnEvent="Tap" cmd:CommandExecuter.Command="{StaticResource FeedbackCommand}"/>
+            </StackPanel>
+        </phone:PivotItem>
+    </phone:Pivot>
+
+    <lib:AppPage.AppBar>
+        <lib:AppBar>
+            <lib:AppBarIconButton 
+                Text="{Binding LocalizedResources.Add, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                IconUri="/Images/add.png"
+                Click="AppBarAddButton_Click"/>
+        </lib:AppBar>
+    </lib:AppPage.AppBar>
+</lib:AppPage>
