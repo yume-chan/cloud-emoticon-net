@@ -124,6 +124,15 @@ namespace CloudEmoticon.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear recent list.
+        /// </summary>
+        public static string ClearRecent {
+            get {
+                return ResourceManager.GetString("ClearRecent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Content has been copied..
         /// </summary>
         public static string Copied {
@@ -178,6 +187,42 @@ namespace CloudEmoticon.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Every day.
+        /// </summary>
+        public static string EveryDay {
+            get {
+                return ResourceManager.GetString("EveryDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Every app startup.
+        /// </summary>
+        public static string EveryStart {
+            get {
+                return ResourceManager.GetString("EveryStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Every three days.
+        /// </summary>
+        public static string EveryThreeDays {
+            get {
+                return ResourceManager.GetString("EveryThreeDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Every week.
+        /// </summary>
+        public static string EveryWeek {
+            get {
+                return ResourceManager.GetString("EveryWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My Favorites.
         /// </summary>
         public static string Favorite {
@@ -203,6 +248,15 @@ namespace CloudEmoticon.Resources {
         public static string ListEmpty {
             get {
                 return ResourceManager.GetString("ListEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manual.
+        /// </summary>
+        public static string Manual {
+            get {
+                return ResourceManager.GetString("Manual", resourceCulture);
             }
         }
         
@@ -268,6 +322,15 @@ namespace CloudEmoticon.Resources {
         public static string Processing {
             get {
                 return ResourceManager.GetString("Processing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent.
+        /// </summary>
+        public static string Recent {
+            get {
+                return ResourceManager.GetString("Recent", resourceCulture);
             }
         }
         
@@ -389,6 +452,24 @@ namespace CloudEmoticon.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update only uses Wi-Fi.
+        /// </summary>
+        public static string UpdateOnWiFi {
+            get {
+                return ResourceManager.GetString("UpdateOnWiFi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update when:.
+        /// </summary>
+        public static string UpdateWhen {
+            get {
+                return ResourceManager.GetString("UpdateWhen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Url.
         /// </summary>
         public static string Url {
@@ -403,6 +484,15 @@ namespace CloudEmoticon.Resources {
         public static string UrlError {
             get {
                 return ResourceManager.GetString("UrlError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong file format.
+        /// </summary>
+        public static string WrongFormat {
+            get {
+                return ResourceManager.GetString("WrongFormat", resourceCulture);
             }
         }
         

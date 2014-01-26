@@ -54,6 +54,36 @@
                     Text="{Binding LocalizedResources.Settings, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
                     FontSize="44"/>
             </phone:PivotItem.Header>
+            <StackPanel>
+                <TextBlock
+                    Text="{Binding LocalizedResources.UpdateWhen, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                    FontSize="{StaticResource PhoneFontSizeMedium}" 
+                    Margin="12,12,12,0" />
+                <toolkit:ListPicker
+                    x:Name="updateWhenPicker" SelectionChanged="updateWhenPicker_SelectionChanged">
+                    <toolkit:ListPickerItem Content="{Binding LocalizedResources.Manual, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
+                    <toolkit:ListPickerItem Content="{Binding LocalizedResources.EveryStart, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
+                    <toolkit:ListPickerItem Content="{Binding LocalizedResources.EveryDay, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
+                    <toolkit:ListPickerItem Content="{Binding LocalizedResources.EveryThreeDays, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
+                    <toolkit:ListPickerItem Content="{Binding LocalizedResources.EveryWeek, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
+                </toolkit:ListPicker>
+                <toolkit:ToggleSwitch
+                    x:Name="updateWiFiSwitch"
+                    Content="{Binding LocalizedResources.UpdateOnWiFi, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
+                    Checked="updateWiFiSwitch_Checked" 
+                    Unchecked="updateWiFiSwitch_Unchecked"/>
+                <Button
+                    x:Name="clearRecentButton"
+                    Content="{Binding LocalizedResources.ClearRecent, Mode=OneWay, Source={StaticResource LocalizedStrings}}" 
+                    Click="clearRecentButton_Click" />
+            </StackPanel>
+        </phone:PivotItem>
+        <phone:PivotItem Margin="0">
+            <phone:PivotItem.Header>
+                <TextBlock 
+                    Text="{Binding LocalizedResources.Repositories, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
+                    FontSize="44"/>
+            </phone:PivotItem.Header>
             <Grid>
                 <Grid x:Name="ListEmptyLabel" Grid.Row="1" Margin="35,0" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
@@ -69,7 +99,9 @@
                         Tap="LoadButton_Tap"/>
                 </Grid>
                 <phone:LongListSelector
-                    x:Name="ResponsitoriesSelector" Grid.Row="1" Margin="12,0,12,0" ItemTemplate="{StaticResource ItemTemplate}"/>
+                    x:Name="ResponsitoriesSelector" 
+                    Grid.Row="1" Margin="12,0,12,0" 
+                    ItemTemplate="{StaticResource ItemTemplate}"/>
             </Grid>
         </phone:PivotItem>
         <phone:PivotItem Margin="0">

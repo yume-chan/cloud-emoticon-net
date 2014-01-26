@@ -14,6 +14,8 @@ namespace Simon.Library.Controls
         /// </summary>
         public ApplicationBarIconButton WrappedObject { get; private set; }
 
+        public AppBar Owner { get; set; }
+
         /// <summary>
         /// Creates a new instance of the Simon.Library.Controls.AppBarIconButton
         ///    class.
@@ -32,6 +34,20 @@ namespace Simon.Library.Controls
             : this()
         {
             WrappedObject.IconUri = iconUri;
+        }
+
+        public static readonly DependencyProperty VisiableProperty =
+            DependencyProperty.Register("Visiable", typeof(bool), typeof(AppBarIconButton), new PropertyMetadata(true, onVisiableChanged));
+        public bool Visiable
+        {
+            get { return (bool)GetValue(VisiableProperty); }
+            set { SetValue(VisiableProperty, value); }
+        }
+        private static void onVisiableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            AppBarIconButton button = (AppBarIconButton)d;
+            if (button.Owner != null)
+                button.Owner.RebuildButtons();
         }
 
         #region IApplicationBarIconButton
@@ -75,9 +91,9 @@ namespace Simon.Library.Controls
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
-        private static void onTextChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void onTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((AppBarIconButton)sender).WrappedObject.Text = (string)e.NewValue;
+            ((AppBarIconButton)d).WrappedObject.Text = (string)e.NewValue;
         }
         #endregion
     }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -45,8 +40,10 @@ namespace Simon.Library
         public AppCollection(List<T> list)
             : base()
         {
+            int startIndex = Items.Count;
             foreach (T item in list)
-                Add(item);
+                Items.Add(item);
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new ReadOnlyCollection<T>(list), startIndex));
         }
 
         /// <summary>

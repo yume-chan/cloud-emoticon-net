@@ -240,4 +240,34 @@
   <data name="FeedbackHelp" xml:space="preserve">
     <value>请在此详细描述您的问题！</value>
   </data>
+  <data name="Recent" xml:space="preserve">
+    <value>最近使用</value>
+  </data>
+  <data name="ClearRecent" xml:space="preserve">
+    <value>清除最近使用列表</value>
+  </data>
+  <data name="EveryDay" xml:space="preserve">
+    <value>每天</value>
+  </data>
+  <data name="EveryStart" xml:space="preserve">
+    <value>每次启动 app</value>
+  </data>
+  <data name="EveryThreeDays" xml:space="preserve">
+    <value>每三天</value>
+  </data>
+  <data name="EveryWeek" xml:space="preserve">
+    <value>每周</value>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>手动</value>
+  </data>
+  <data name="UpdateOnWiFi" xml:space="preserve">
+    <value>仅使用 Wi-Fi 更新</value>
+  </data>
+  <data name="UpdateWhen" xml:space="preserve">
+    <value>更新频率：</value>
+  </data>
+  <data name="WrongFormat" xml:space="preserve">
+    <value>错误的文件格式</value>
+  </data>
 </root>

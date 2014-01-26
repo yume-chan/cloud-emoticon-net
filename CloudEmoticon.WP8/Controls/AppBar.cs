@@ -1,6 +1,7 @@
 ﻿using Microsoft.Phone.Shell;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
@@ -21,12 +22,18 @@ namespace Simon.Library.Controls
         /// </summary>
         public ApplicationBar WrappedObject { get; private set; }
 
+        public List<AppBarIconButton> ButtonList { get; private set; }
+        public List<AppBarMenuItem> MenuItemList { get; private set; }
+
         /// <summary>
         /// Initializes a new instance of the Simon.Library.Controls.AppBar class.
         /// </summary>
         public AppBar()
         {
             WrappedObject = new ApplicationBar();
+
+            ButtonList = new List<AppBarIconButton>();
+            MenuItemList = new List<AppBarMenuItem>();
         }
 
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
@@ -36,15 +43,36 @@ namespace Simon.Library.Controls
             if (DesignerProperties.IsInDesignTool)
                 return;
 
+            ButtonList.Clear();
             WrappedObject.Buttons.Clear();
+            MenuItemList.Clear();
             WrappedObject.MenuItems.Clear();
             foreach (object item in Items)
             {
                 if (item is AppBarIconButton)
-                    WrappedObject.Buttons.Add(((AppBarIconButton) item).WrappedObject);
+                {
+                    AppBarIconButton button = (AppBarIconButton)item;
+                    button.Owner = this;
+                    if (button.Visiable)
+                        WrappedObject.Buttons.Add(button.WrappedObject);
+                    ButtonList.Add(button);
+                }
                 else if (item is AppBarMenuItem)
+                {
                     WrappedObject.MenuItems.Add(((AppBarMenuItem)item).WrappedObject);
+                    MenuItemList.Add((AppBarMenuItem)item);
+                }
+                else
+                    throw new InvalidCastException();
             }
+        }
+
+        public void RebuildButtons()
+        {
+            WrappedObject.Buttons.Clear();
+            foreach (AppBarIconButton button in ButtonList)
+                if (button.Visiable)
+                    WrappedObject.Buttons.Add(button.WrappedObject);
         }
 
         #region IApplicationBar

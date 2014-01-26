@@ -4,7 +4,7 @@
   <Languages xmlns="">
     <Language code="zh-Hans" />
   </Languages>
-  <App xmlns="" ProductID="{eab91d06-7e35-4dc1-876c-220ba5da115f}" Title="Cloud Emoticon" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Simon Chan" Description="A cloud-based emoticon dictionary with local cache and favirote list features." Publisher="Simon Software" PublisherID="{95a335a9-004d-4e71-9812-8ba0228f938d}">
+  <App xmlns="" ProductID="{eab91d06-7e35-4dc1-876c-220ba5da115f}" Title="Cloud Emoticon" RuntimeType="Silverlight" Version="1.0.1.0" Genre="apps.normal" Author="Simon Chan" Description="Cloud emoticon, as its name, is a useful cloud-based emoticon dictionary." Publisher="Simon Software" PublisherID="{95a335a9-004d-4e71-9812-8ba0228f938d}">
     <IconPath IsRelative="true" IsResource="false">Images\logo.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -18,7 +18,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Images\logo.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Images\logo.png</BackgroundImageURI>
-          <Title>CloudEmoticon</Title>
+          <Title>Cloud Emoticon</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>

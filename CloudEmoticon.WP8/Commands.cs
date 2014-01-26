@@ -28,13 +28,22 @@ namespace CloudEmoticon
 
         public void Execute(object parameter)
         {
-            Clipboard.SetText((string)parameter);
+            string text = (string)parameter;
+            Clipboard.SetText(text);
 
             MainPage.ProgressIndicator.Text = AppResources.Copied;
             MainPage.ProgressIndicator.IsIndeterminate = false;
             MainPage.ProgressIndicator.Value = 0;
             MainPage.ProgressIndicator.IsVisible = true;
             MainPage.ProgressIndicator.Hide(2000);
+            
+            if(SettingPage.Recent.Contains(text))
+                SettingPage.Recent.Remove(text);
+            if (SettingPage.Recent.Count == 50)
+                SettingPage.Recent.Remove(SettingPage.Recent.ElementAt(49));
+            SettingPage.Recent.Add(text);
+            App.Settings.Save();
+            MainPage.RecentList.Rebuild();
         }
     }
 
@@ -78,7 +87,7 @@ namespace CloudEmoticon
             MainPage.FavoriteList.Rebuild();
 
             MainPage page = ((MainPage)((PhoneApplicationFrame)App.RootFrame).Content);
-            page.pivot.SelectedIndex = 0;
+            page.pivot.SelectedIndex = 1;
         }
     }
 

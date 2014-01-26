@@ -240,4 +240,34 @@ Load default repositoriy?</value>
   <data name="FeedbackHelp" xml:space="preserve">
     <value>Please describe your problem in detail here.</value>
   </data>
+  <data name="Recent" xml:space="preserve">
+    <value>Recent</value>
+  </data>
+  <data name="ClearRecent" xml:space="preserve">
+    <value>Clear recent list</value>
+  </data>
+  <data name="EveryDay" xml:space="preserve">
+    <value>Every day</value>
+  </data>
+  <data name="EveryStart" xml:space="preserve">
+    <value>Every app startup</value>
+  </data>
+  <data name="EveryThreeDays" xml:space="preserve">
+    <value>Every three days</value>
+  </data>
+  <data name="EveryWeek" xml:space="preserve">
+    <value>Every week</value>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="UpdateOnWiFi" xml:space="preserve">
+    <value>Update only uses Wi-Fi</value>
+  </data>
+  <data name="UpdateWhen" xml:space="preserve">
+    <value>Update when:</value>
+  </data>
+  <data name="WrongFormat" xml:space="preserve">
+    <value>Wrong file format</value>
+  </data>
 </root>
