@@ -2,65 +2,41 @@
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Net.NetworkInformation;
 using Microsoft.Phone.Shell;
+using Simon.Library;
 using Simon.Library.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Windows.Networking.Connectivity;
 
 namespace CloudEmoticon
 {
     public partial class MainPage : AppPage
     {
-        public static EmoticonList EmoticonList { get; private set; }
-        public static FavoriteList FavoriteList { get; private set; }
-        public static RecentList RecentList { get; private set; }
-
         public MainPage()
             : base()
         {
             InitializeComponent();
 
-            if (App.Settings["firstStart"] == null)
-            {
-                App.Settings["favorite"] = new HashSet<string>();
-                App.Settings["noteMap"] = new Dictionary<string, string>();
-                App.Settings["repositories"] = new HashSet<string>();
-                App.Settings["infoMap"] = new Dictionary<string, string>();
-                App.Settings["cacheMap"] = new Dictionary<string, string>();
-                App.Settings["firstStart"] = false;
-                App.Settings.Save();
-            }
-            // Version 1.0.1
-            if (App.Settings["recent"] == null)
-            {
-                App.Settings["recent"] = new HashSet<string>();
-                App.Settings["updateWhen"] = 1;
-                App.Settings["updateWiFi"] = false;
-                App.Settings["lastUpdate"] = DateTime.MinValue;
-                App.Settings.Save();
-            }
+            DataContext = App.ViewModel;
 
-            EmoticonList = new EmoticonList();
-            EmoticonSelector.ItemsSource = EmoticonList;
-
-            FavoriteList = new FavoriteList();
-            FavoriteSelector.ItemsSource = FavoriteList;
-            FavoriteList.CollectionChanged += FavoriteList_CollectionChanged;
+            App.ViewModel.FavoriteList.CollectionChanged += FavoriteList_CollectionChanged;
             toggleEmptyLabel();
 
-            RecentList = new RecentList();
-            RecentSelector.ItemsSource = RecentList;
-            if (RecentList.Count == 0)
-                pivot.SelectedIndex = 1;
+            if (App.ViewModel.RecentList.Count == 0)
+                if (App.ViewModel.FavoriteList.Count == 0)
+                    pivot.SelectedIndex = 2;
+                else
+                    pivot.SelectedIndex = 1;
         }
 
         void toggleEmptyLabel()
         {
-            if (FavoriteList.Count == 0)
+            if (App.ViewModel.FavoriteList.Count == 0)
             {
                 ListEmptyLabel.Visibility = Visibility.Visible;
                 FavoriteSelector.Visibility = Visibility.Collapsed;
@@ -75,17 +51,6 @@ namespace CloudEmoticon
         void FavoriteList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             toggleEmptyLabel();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            if (NavigationContext.QueryString.ContainsKey("copy"))
-            {
-                Clipboard.SetText(NavigationContext.QueryString["copy"]);
-                throw new Exception("App exit");
-            }
         }
 
         public static void EditPrompt(EmoticonItem item = null)
@@ -123,25 +88,25 @@ namespace CloudEmoticon
             {
                 if (ev.Result == CustomMessageBoxResult.LeftButton)
                 {
-                    HashSet<string> favorite = SettingPage.Favorite;
-                    Dictionary<string, string> noteMap = SettingPage.NoteMap;
+                    AppCollection<string> favorite = App.ViewModel.Favorite;
+                    Dictionary<int, string> noteMap = App.ViewModel.NoteMap;
 
                     if (favorite.Contains(item.Text))
                     {
                         favorite.Remove(item.Text);
-                        noteMap.Remove(item.Text);
+                        noteMap.Remove(item.Text.GetHashCode());
                     }
                     if (favorite.Contains(TextBox.Text))
                         favorite.Remove(TextBox.Text);
                     favorite.Add(TextBox.Text);
 
-                    if (noteMap.ContainsKey(TextBox.Text))
-                        noteMap[TextBox.Text] = NoteBox.Text;
+                    if (noteMap.ContainsKey(TextBox.Text.GetHashCode()))
+                        noteMap[TextBox.Text.GetHashCode()] = NoteBox.Text;
                     else
-                        noteMap.Add(TextBox.Text, NoteBox.Text);
+                        noteMap.Add(TextBox.Text.GetHashCode(), NoteBox.Text);
 
                     App.Settings.Save();
-                    MainPage.FavoriteList.Rebuild();
+                    App.ViewModel.FavoriteList.Rebuild();
                 }
             };
             messageBox.Show();
@@ -158,7 +123,7 @@ namespace CloudEmoticon
 
         private async void AppBarRefreshButton_Click(object sender, EventArgs e)
         {
-            await EmoticonList.UpdateRepositories();
+            await App.ViewModel.EmoticonList.UpdateRepositories();
         }
 
         private void AppBarSettingButton_Click(object sender, EventArgs e)
@@ -171,11 +136,37 @@ namespace CloudEmoticon
         {
             if (firstStart)
             {
-                if (SettingPage.Repositories.Count != 0)
-                {
-                    foreach (string url in SettingPage.Repositories)
-                        EmoticonList.AddRepository(new EmoticonRepository(url));
+                AutoResetEvent @event = new AutoResetEvent(false);
 
+                var queryStrings = NavigationContext.QueryString;
+                if (queryStrings.ContainsKey("addResposity"))
+                {
+                    CustomMessageBox messageBox = new CustomMessageBox()
+                    {
+                        Message = string.Format(AppResources.AddResposityComfirm, queryStrings["addResposity"]),
+                        LeftButtonContent = AppResources.Yes,
+                        IsLeftButtonEnabled = true,
+                        RightButtonContent = AppResources.No,
+                        IsRightButtonEnabled = true,
+                    };
+                    messageBox.Dismissed += async (s, ev) =>
+                    {
+                        @event.Set();
+                        if (ev.Result == CustomMessageBoxResult.LeftButton)
+                        {
+                            App.ViewModel.Repositories.Add(queryStrings["addResposity"]);
+                            await App.ViewModel.EmoticonList.UpdateRepositories();
+                        }
+                    };
+                    messageBox.Show();
+                }
+                else
+                    @event.Set();
+
+                await Task.Run(() => { @event.WaitOne(); });
+
+                if (App.ViewModel.Repositories.Count != 0)
+                {
                     TimeSpan timeout = new TimeSpan();
                     switch ((int)App.Settings["updateWhen"])
                     {
@@ -198,17 +189,21 @@ namespace CloudEmoticon
                     if (DateTime.UtcNow - (DateTime)App.Settings["lastUpdate"] > timeout &&
                         (!(bool)App.Settings["updateWiFi"] ||
                         ((bool)App.Settings["updateWiFi"] && DeviceNetworkInformation.IsWiFiEnabled)))
-                        await EmoticonList.UpdateRepositories();
+                        await App.ViewModel.EmoticonList.UpdateRepositories();
                 }
                 else
                 {
                     if ((bool?)App.Settings["noprompt"] != true)
                     {
                         CheckBox noPrompt = new CheckBox() { Content = AppResources.NoPrompt, IsChecked = false };
+                        TextBlock noPromptHint = new TextBlock() { Text = AppResources.NoPromptHint, FontSize = (double)App.Current.Resources["PhoneFontSizeSmall"], Visibility = Visibility.Collapsed };
+                        StackPanel container = new StackPanel();
+                        container.Children.Add(noPrompt);
+                        container.Children.Add(noPromptHint);
                         CustomMessageBox messageBox = new CustomMessageBox()
                         {
                             Message = AppResources.NoRepositories,
-                            Content = noPrompt,
+                            Content = container,
                             LeftButtonContent = AppResources.Yes,
                             IsLeftButtonEnabled = true,
                             RightButtonContent = AppResources.No,
@@ -217,12 +212,14 @@ namespace CloudEmoticon
                         noPrompt.Checked += (s, ev) =>
                         {
                             messageBox.IsLeftButtonEnabled = false;
+                            noPromptHint.Visibility = Visibility.Visible;
                             App.Settings["noprompt"] = true;
                             App.Settings.Save();
                         };
                         noPrompt.Unchecked += (s, ev) =>
                         {
                             messageBox.IsLeftButtonEnabled = true;
+                            noPromptHint.Visibility = Visibility.Collapsed;
                             App.Settings["noprompt"] = false;
                             App.Settings.Save();
                         };
@@ -230,8 +227,8 @@ namespace CloudEmoticon
                         {
                             if (ev.Result == CustomMessageBoxResult.LeftButton)
                             {
-                                EmoticonList.AddRepository(new EmoticonRepository(AppResources.DefaultList));
-                                await EmoticonList.UpdateRepositories();
+                                App.ViewModel.Repositories.Add(AppResources.DefaultList);
+                                await App.ViewModel.EmoticonList.UpdateRepositories();
                             }
                         };
                         messageBox.Show();
@@ -242,8 +239,8 @@ namespace CloudEmoticon
             }
             else
             {
-                if (EmoticonList.Count > 0)
-                    EmoticonSelector.ScrollTo(EmoticonList[0]);
+                if (App.ViewModel.EmoticonList.Count > 0)
+                    EmoticonSelector.ScrollTo(App.ViewModel.EmoticonList[0]);
             }
         }
 

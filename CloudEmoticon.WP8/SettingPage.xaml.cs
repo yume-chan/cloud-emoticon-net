@@ -1,35 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using CloudEmoticon.Resources;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Tasks;
+using Simon.Library;
+using Simon.Library.Controls;
+using System;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using Simon.Library.Controls;
-using Simon.Library;
-using CloudEmoticon.Resources;
 
 namespace CloudEmoticon
 {
     public partial class SettingPage : AppPage
     {
-        public static HashSet<string> Favorite = (HashSet<string>)App.Settings["favorite"];
-        public static Dictionary<string, string> NoteMap = (Dictionary<string, string>)App.Settings["noteMap"];
-        public static HashSet<string> Repositories = (HashSet<string>)App.Settings["repositories"];
-        public static Dictionary<string, string> InfoMap = (Dictionary<string, string>)App.Settings["infoMap"];
-        public static Dictionary<string, string> CacheMap = (Dictionary<string, string>)App.Settings["cacheMap"];
-        public static HashSet<string> Recent = (HashSet<string>)App.Settings["recent"];
-
         private AppCollection<EmoticonRepository> repositories;
+
+        private AppBar RepositoriesAppBar;
 
         public SettingPage()
             : base()
         {
             InitializeComponent();
 
-            repositories = MainPage.EmoticonList.Repositories;
+            repositories = App.ViewModel.EmoticonList.Repositories;
             ResponsitoriesSelector.ItemsSource = repositories;
             repositories.CollectionChanged += Repositories_CollectionChanged;
 
@@ -46,9 +38,11 @@ namespace CloudEmoticon
 
             updateWhenPicker.SelectedIndex = (int)App.Settings["updateWhen"];
             updateWiFiSwitch.IsChecked = (bool)App.Settings["updateWiFi"];
+
+            RepositoriesAppBar = AppBar;
         }
 
-        void Repositories_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        void Repositories_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (repositories.Count == 0)
             {
@@ -87,10 +81,10 @@ namespace CloudEmoticon
                     try
                     {
                         Uri uri = new Uri(textbox1.Text, UriKind.Absolute);
-                        MainPage.EmoticonList.AddRepository(new EmoticonRepository(textbox1.Text));
-                        await MainPage.EmoticonList.UpdateRepositories();
+                        App.ViewModel.Repositories.Add(textbox1.Text);
+                        await App.ViewModel.EmoticonList.UpdateRepositories();
                     }
-                    catch (UriFormatException ex)
+                    catch (UriFormatException)
                     {
                         MessageBox.Show(AppResources.UrlError);
                     }
@@ -107,15 +101,15 @@ namespace CloudEmoticon
 
         private async void LoadButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            MainPage.EmoticonList.AddRepository(new EmoticonRepository(AppResources.DefaultList));
-            await MainPage.EmoticonList.UpdateRepositories();
+            App.ViewModel.Repositories.Add(AppResources.DefaultList);
+            await App.ViewModel.EmoticonList.UpdateRepositories();
         }
 
         private void clearRecentButton_Click(object sender, RoutedEventArgs e)
         {
-            Recent.Clear();
+            App.ViewModel.Recent.Clear();
             App.Settings.Save();
-            MainPage.RecentList.Rebuild();
+            App.ViewModel.RecentList.Rebuild();
         }
 
         private void updateWhenPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -136,6 +130,19 @@ namespace CloudEmoticon
         {
             App.Settings["updateWiFi"] = false;
             App.Settings.Save();
+        }
+
+        private void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (pivot.SelectedIndex == 1)
+                AppBar = RepositoriesAppBar;
+            else
+                AppBar = null;
+        }
+
+        private void AppBarStoreButton_Click(object sender, EventArgs e)
+        {
+            new WebBrowserTask() { Uri = new Uri(AppResources.CloudEmoticonStore) }.Show();
         }
     }
 }

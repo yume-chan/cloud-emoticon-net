@@ -1,22 +1,45 @@
-﻿using System;
+﻿using CloudEmoticon.Resources;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using Simon.Library;
+using System;
 using System.Diagnostics;
-using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using CloudEmoticon.Resources;
-using Simon.Library;
+using System.Net;
+using System.Windows.Media;
 
 namespace CloudEmoticon
 {
+    internal class CustomUriMapper : UriMapperBase
+    {
+        public override Uri MapUri(Uri uri)
+        {
+            string uriString = uri.ToString();
+            if (uriString.StartsWith("/Protocol?"))
+                return new Uri(string.Format("/MainPage.xaml?addResposity={0}", uriString.Substring("/Protocol?encodedLaunchUri=".Length).Replace("cloudemoticon", "http")), UriKind.Relative);
+            else if (uriString.StartsWith("/MainPage.xaml?copy="))
+            {
+                Clipboard.SetText(HttpUtility.UrlDecode(uriString.Substring("/MainPage.xaml?copy=".Length)));
+                throw new Exception("App exit");
+            }
+            else
+                return uri;
+        }
+    }
+
     public partial class App : Application
     {
         /// <summary>
         /// An instance of <code>AppSettings</code>
         /// </summary>
         public static AppSettings Settings = new AppSettings();
+
+        /// <summary>
+        /// An instance of <code>ViewModel</code>
+        /// </summary>
+        public static ViewModel ViewModel = ViewModel.Instance;
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -40,6 +63,10 @@ namespace CloudEmoticon
 
             // Language display initialization
             InitializeLanguage();
+
+            ThemeManager.OverrideOptions = ThemeManagerOverrideOptions.None;
+            ThemeManager.ToLightTheme();
+            ThemeManager.SetAccentColor(0xFF4CBEE8);
 
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
@@ -120,7 +147,8 @@ namespace CloudEmoticon
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
-            RootFrame = new PhoneApplicationFrame();
+            RootFrame = new TransitionFrame();
+            RootFrame.Background = App.Current.Resources["PhoneBackgroundBrush"] as SolidColorBrush;
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
             // Handle navigation failures
@@ -128,6 +156,8 @@ namespace CloudEmoticon
 
             // Handle reset requests for clearing the backstack
             RootFrame.Navigated += CheckForResetNavigation;
+
+            RootFrame.UriMapper = new CustomUriMapper();
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;

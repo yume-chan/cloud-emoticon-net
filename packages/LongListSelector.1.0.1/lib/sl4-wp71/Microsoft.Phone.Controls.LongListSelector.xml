@@ -1,0 +1,680 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Phone.Controls.LongListSelector</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Phone.Controls.ItemRealizationEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Microsoft.Phone.Controls.LongListSelectorEx.ItemRealized"/> event of <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.ItemRealizationEventArgs.Container">
+            <summary>
+            Gets the <see cref="T:System.Windows.Controls.ContentPresenter"/> which is displaying the item.
+            </summary>
+            
+            <returns>
+            The <see cref="T:System.Windows.Controls.ContentPresenter"/> which is displaying the item.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.ItemRealizationEventArgs.ItemKind">
+            <summary>
+            Gets the kind of item that are realized.
+            </summary>
+            
+            <returns>
+            The kind of item that are realized.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Phone.Controls.JumpListItemBackgroundConverter">
+            <summary>
+            Represents the <see cref="T:System.Windows.Data.IValueConverter"/> to be used by a <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>'s <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.JumpListStyle"/>'s <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ItemTemplate"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Phone.Controls.JumpListItemBackgroundConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Phone.Controls.JumpListItemBackgroundConverter" /> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Phone.Controls.JumpListItemBackgroundConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Returns the enabled brush if the item has values, otherwise returns the disabled brush.
+            </summary>
+            
+            <returns>
+            The enabled brush if the item has values, otherwise returns the disabled brush.
+            </returns>
+            <param name="value">The source data being passed to the target.</param>
+            <param name="targetType">The <see cref="T:System.Type"/> of data expected by the target dependency property.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+        </member>
+        <member name="M:Microsoft.Phone.Controls.JumpListItemBackgroundConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the target data before passing it to the source object.
+            </summary>
+            
+            <returns>
+            The value to be passed to the source object.
+            </returns>
+            <param name="value">The target data being passed to the source.</param>
+            <param name="targetType">The <see cref="T:Syste.Type"/> of data expected by the source object.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.JumpListItemBackgroundConverter.Enabled">
+            <summary>
+            Gets or sets the brush to be used for the background when the group is not empty and the jump list item is enabled.
+            </summary>
+            
+            <returns>
+            The brush to be used for the background when the group is not empty and the jump list item is enabled.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.JumpListItemBackgroundConverter.Disabled">
+            <summary>
+            Gets or sets the brush to be used for the background when the group is empty and the jump list item is disabled.
+            </summary>
+            
+            <returns>
+            The brush to be used for the background when the group is empty and the jump list item is disabled.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Phone.Controls.JumpListItemForegroundConverter">
+            <summary>
+            Represents the <see cref="T:System.Windows.Data.IValueConverter"/> that is used by a <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>'s <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.JumpListStyle"/>'s <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ItemTemplate"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Phone.Controls.JumpListItemForegroundConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Phone.Controls.JumpListItemForegroundConverter" /> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Phone.Controls.JumpListItemForegroundConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the source data before passing it to the target for display in the UI.
+            </summary>
+            
+            <returns>
+            The value to be passed to the target dependency property.
+            </returns>
+            <param name="value">The source data being passed to the target.</param>
+            <param name="targetType">The type of data expected by the target dependency property.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+        </member>
+        <member name="M:Microsoft.Phone.Controls.JumpListItemForegroundConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the target data before passing it to the source object. This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay"/> bindings.
+            </summary>
+            
+            <returns>
+            Returns <see cref="T:System.Object"/>.
+            </returns>
+            <param name="value">The target data being passed to the source.</param>
+            <param name="targetType">The type of data expected by the source object.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.JumpListItemForegroundConverter.Enabled">
+            <summary>
+            Gets or sets the brush to be used for the foreground when the group is not empty and the jump list item is enabled.
+            </summary>
+            
+            <returns>
+            The brush to be used for the foreground when the group is not empty and the jump list item is enabled.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.JumpListItemForegroundConverter.Disabled">
+            <summary>
+            Gets or sets the brush to be used for the foreground when the group is empty and the jump list item is disabled.
+            </summary>
+            
+            <returns>
+            The brush to be used for the foreground when the group is empty and the jump list item is disabled.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Phone.Controls.LongListSelectorEx">
+            <summary>
+            Displays a list of selectable items with a mechanism for users to jump to a specific section of the list.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.ListHeaderTemplateProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ListHeaderTemplate"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ListHeaderTemplate"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.ListHeaderProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ListHeader"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ListHeader"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.ListFooterTemplateProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ListFooterTemplate"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ListFooterTemplate"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.ListFooterProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ListFooter"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ListFooter"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.GroupHeaderTemplateProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.GroupHeaderTemplate"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.GroupHeaderTemplate"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.GroupFooterTemplateProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.GroupFooterTemplate"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.GroupFooterTemplate"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.ItemTemplateProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ItemTemplate"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ItemTemplate"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.ItemsSourceProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ItemsSource"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.ItemsSource"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.GridCellSizeProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.GridCellSize"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.GridCellSize"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.HideEmptyGroupsProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.HideEmptyGroups"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.HideEmptyGroups"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.IsGroupingEnabledProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.IsGroupingEnabled"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.IsGroupingEnabled"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorEx.JumpListStyleProperty">
+            <summary>
+            Identifies the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.JumpListStyle"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:Microsoft.Phone.Controls.LongListSelectorEx.JumpListStyle"/> dependency property.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Phone.Controls.LongListSelectorEx.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Phone.Controls.LongListSelectorEx.ScrollTo(System.Object)">
+            <summary>
+            Scrolls to a specified item in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            <param name="item">The list item to scroll to.</param>
+        </member>
+        <member name="M:Microsoft.Phone.Controls.LongListSelectorEx.OnApplyTemplate">
+            <summary>
+            Builds the visual tree for the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/> control when a new template is applied.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Phone.Controls.LongListSelectorEx.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Provides the behavior for the Measure pass of layout.
+            </summary>
+            
+            <returns>
+            The size that this object determines it needs during layout, based on its calculations of the allocated sizes for child objects; or based on other considerations, such as a fixed container size.
+            </returns>
+            <param name="availableSize">The available size that this object can give to child objects. Infinity (<see cref="F:System.Double.PositiveInfinity"/>) can be specified as a value to indicate that the object will size to whatever content is available.</param>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.ListHeaderTemplate">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/>for an item to display at the head of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            The <see cref="T:System.Windows.DataTemplate"/> for an item to display at the head of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.ListHeader">
+            <summary>
+            Gets or sets the object to display at the head of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            The <see cref="T:System.Object"/> that is displayed at the head of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.ListFooterTemplate">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/>for an item to display at the foot of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            The <see cref="T:System.Windows.DataTemplate"/> for an item to display at the foot of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.ListFooter">
+            <summary>
+            Gets or sets the object that is displayed at the foot of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            The <see cref="T:System.Object"/> that is displayed at the foot of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.GroupHeaderTemplate">
+            <summary>
+            Gets or sets the template for the group header in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            The <see cref="T:System.Windows.DataTemplate"/> for the group header in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.GroupFooterTemplate">
+            <summary>
+            Gets or sets the template for the group footer in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            The <see cref="T:System.Windows.DataTemplate"/> that provides the templates for the group footer in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.ItemTemplate">
+            <summary>
+            Gets or sets the template for the items in the items view
+            </summary>
+            
+            <returns>
+            The <see cref="T:System.Windows.DataTemplate"/> for the items in the items view.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.ItemsSource">
+            <summary>
+            Gets or sets a collection used to generate the content of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            A collection that is used to generate the content of the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.LayoutMode">
+            <summary>
+            Gets or sets a value that specifies if the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/> is in a list mode or grid mode from the <see cref="T:Microsoft.Phone.Controls.LongListSelectorExLayoutMode"/> enum.
+            </summary>
+            
+            <returns>
+            A <see cref="T:Microsoft.Phone.Controls.LongListSelectorExLayoutMode"/> value that specifies if the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/> is in a list mode or grid mode.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.GridCellSize">
+            <summary>
+            Gets or sets the size used when displaying an item in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            The size used when displaying an item.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.HideEmptyGroups">
+            <summary>
+            Gets or sets a value that indicates whether to hide empty groups in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            true if empty groups are hidden; otherwise false.Default is false.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.IsGroupingEnabled">
+            <summary>
+            Gets or sets a value that indicates whether grouping is enabled in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            true if grouping is enabled; otherwise false.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.JumpListStyle">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Style"/> for jump list in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            The <see cref="T:System.Windows.Style"/> for the jump list in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.ManipulationState">
+            <summary>
+            Gets the state of manipulation handling on the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/> control.
+            </summary>
+            
+            <returns>
+            The state of manipulation handling on the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/> control.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.LongListSelectorEx.SelectedItem">
+            <summary>
+            Gets the currently selected item in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+            
+            <returns>
+            The <see cref="T:System.Object"/> that represents the currently selected item in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </returns>
+        </member>
+        <member name="E:Microsoft.Phone.Controls.LongListSelectorEx.SelectionChanged">
+            <summary>
+            Occurs when the currently selected item changes.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Phone.Controls.LongListSelectorEx.ItemRealized">
+            <summary>
+            Occurs when a new item is realized.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Phone.Controls.LongListSelectorEx.ItemUnrealized">
+            <summary>
+            Occurs when an item in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/> is unrealized.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Phone.Controls.LongListSelectorEx.JumpListOpening">
+            <summary>
+            Occurs when a jump list is opened.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Phone.Controls.LongListSelectorEx.JumpListClosed">
+            <summary>
+            Occurs when the jump list is closed.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Phone.Controls.LongListSelectorEx.ManipulationStateChanged">
+            <summary>
+            Occurs when <see cref="T:Microsoft.Phone.Controls.ManipulationState"/> changes.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Phone.Controls.LongListSelectorEx.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Phone.Controls.LongListSelectorItemKind">
+            <summary>
+            Represents the different kind of items that exists in <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorItemKind.ListHeader">
+            <summary>
+            Represents a list header in a <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx" />.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorItemKind.GroupHeader">
+            <summary>
+            Represents a group header in a <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx" />.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorItemKind.Item">
+            <summary>
+            Represents an item in a <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx" />.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorItemKind.GroupFooter">
+            <summary>
+            Represents a group footer in a <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx" />.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorItemKind.ListFooter">
+            <summary>
+            Represents a list footer in a <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx" />.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Phone.Controls.LongListSelectorLayoutMode">
+            <summary>
+            Specifies the layout options for the items in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorLayoutMode.List">
+            <summary>
+            Specifies that the items in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx" /> are arranged in a list layout.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Phone.Controls.LongListSelectorLayoutMode.Grid">
+            <summary>
+            Specifies that the items in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx" /> are arranged in a grid layout.
+            </summary>
+        </member>
+        <member name="T:System.Windows.Controls.Primitives.ManipulationState">
+            <summary>
+            Specifies the different mutually exclusive manipulation states of the ViewPortControl.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Controls.Primitives.ManipulationState.Idle">
+            <summary>
+            Specifies that nothing is manipulating or animating.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Controls.Primitives.ManipulationState.Manipulating">
+            <summary>
+            Specifies that gesture is being recognized, finger is down and any delta is received, drag/pan or flick,
+            or that no gesture is currently happening, but there is some animation happening, like scroll animation or compression animation.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Controls.Primitives.ManipulationState.Animating">
+            <summary>
+            Specifies that no gesture is currently happening, but there is some animation happening, like scroll animation or compression animation.
+            </summary>
+        </member>
+        <member name="T:System.Windows.Controls.Primitives.ManipulationStateChangedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:System.Windows.Controls.Primitives.ViewportControl.ManipulationStateChanged"/> event.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Phone.Controls.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.CircularBuffer_EnumeratorVersionChanged">
+            <summary>
+              Looks up a localized string similar to Collection was modified; enumeration operation cannot execute..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.CircularBuffer_RemoveWhenEmpty">
+            <summary>
+              Looks up a localized string similar to Cannot remove items from an empty collection..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.ItemCollection_NotSupportedReadOnlyCollection">
+            <summary>
+              Looks up a localized string similar to Operation not supported on read-only collection..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.ItemIterator_InvalidState">
+            <summary>
+              Looks up a localized string similar to Iteration can&apos;t continue because the iterator state is invalid..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.LongListSelector_DuplicateGroups">
+            <summary>
+              Looks up a localized string similar to Cannot add a group already in the collection..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.LongListSelector_IsBalancing">
+            <summary>
+              Looks up a localized string similar to This property cannot be set from the ItemRealized or ItemUnrealized event handlers, or from MeasureOverride..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.LongListSelector_NullGroup">
+            <summary>
+              Looks up a localized string similar to Cannot add a null group to the collection..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.LongListSelector_ScrollToGroupNoGroups">
+            <summary>
+              Looks up a localized string similar to Cannot advance to a group when grouping is disabled..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Phone.Controls.Properties.Resources.LongListSelector_ScrollToInvalidItem">
+            <summary>
+              Looks up a localized string similar to The provided item doesn&apos;t exist in the collection..
+            </summary>
+        </member>
+        <member name="T:System.Windows.Controls.Primitives.ViewportChangedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:System.Windows.Controls.Primitives.ViewportControl.ViewportChanged"/> event.
+            </summary>
+        </member>
+        <member name="T:System.Windows.Controls.Primitives.ViewportControl">
+            <summary>
+            Represents the virtualized scrollable region in the <see cref="T:Microsoft.Phone.Controls.LongListSelectorEx"/>.
+            </summary>
+        </member>
+        <member name="M:System.Windows.Controls.Primitives.ViewportControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Windows.Controls.Primitives.ViewportControl"/> class.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Controls.Primitives.ViewportControl.BoundsProperty">
+            <summary>
+            Identifies the <see cref="P:System.Windows.Controls.Primitives.ViewportControl.Bounds"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:System.Windows.Controls.Primitives.ViewportControl.Bounds"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:System.Windows.Controls.Primitives.ViewportControl.ViewportProperty">
+            <summary>
+            Identifies the <see cref="P:System.Windows.Controls.Primitives.ViewportControl.Viewport"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:System.Windows.Controls.Primitives.ViewportControl.Viewport"/> dependency property.
+            </returns>
+        </member>
+        <member name="F:System.Windows.Controls.Primitives.ViewportControl.ManipulationStateProperty">
+            <summary>
+            Identifies the <see cref="P:System.Windows.Controls.Primitives.ViewportControl.ManipulationState"/> dependency property.
+            </summary>
+            
+            <returns>
+            The identifier for the <see cref="P:System.Windows.Controls.Primitives.ViewportControl.ManipulationState"/> dependency property.
+            </returns>
+        </member>
+        <member name="M:System.Windows.Controls.Primitives.ViewportControl.OnApplyTemplate">
+            <summary>
+            Builds the visual tree for the <see cref="T:System.Windows.Controls.Primitives.ViewportControl"/> when a new template is applied.
+            </summary>
+        </member>
+        <member name="M:System.Windows.Controls.Primitives.ViewportControl.SetViewportOrigin(System.Windows.Point)">
+            <summary>
+            Scrolls to the specified viewport origin.
+            </summary>
+            <param name="location">The specified viewport origin.</param>
+        </member>
+        <member name="M:System.Windows.Controls.Primitives.ViewportControl.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Handles the measure pass for the control.
+            </summary>
+            
+            <returns>
+            The desired size.
+            </returns>
+            <param name="availableSize">The available size.</param>
+        </member>
+        <member name="P:System.Windows.Controls.Primitives.ViewportControl.Bounds">
+            <summary>
+            Gets or sets the bounds of the scrollable surface in the <see cref="T:System.Windows.Controls.Primitives.ViewportControl"/>.
+            </summary>
+            
+            <returns>
+            The bounds of the scrollable surface in the <see cref="T:System.Windows.Controls.Primitives.ViewportControl"/>.
+            </returns>
+        </member>
+        <member name="P:System.Windows.Controls.Primitives.ViewportControl.Viewport">
+            <summary>
+            Gets the current viewport.
+            </summary>
+            
+            <returns>
+            The current viewport.
+            </returns>
+        </member>
+        <member name="P:System.Windows.Controls.Primitives.ViewportControl.ManipulationState">
+            <summary>
+            Gets the current <see cref="T:System.Windows.Controls.Primitives.ManipulationState"/>.
+            </summary>
+            
+            <returns>
+            the current <see cref="T:System.Windows.Controls.Primitives.ManipulationState"/>. Default is <see cref="F:System.Windows.Controls.Primitives.ManipulationState.Idle"/>.
+            </returns>
+        </member>
+        <member name="E:System.Windows.Controls.Primitives.ViewportControl.ViewportChanged">
+            <summary>
+            Occurs when the viewport changes.
+            </summary>
+        </member>
+        <member name="E:System.Windows.Controls.Primitives.ViewportControl.ManipulationStateChanged">
+            <summary>
+            Occurs when the manipulation state changes.
+            </summary>
+        </member>
+    </members>
+</doc>

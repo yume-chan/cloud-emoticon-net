@@ -1,11 +1,8 @@
-﻿
-using System.Windows.Input;
-using System.Windows.Controls.Primitives;
-using System.Windows.Controls;
-using System.Reflection;
+﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
-using System;
+using System.Windows.Input;
 
 namespace NaveenDhaka
 {
@@ -62,9 +59,7 @@ namespace NaveenDhaka
             {
                 ICommand command = element.GetValue(CommandProperty) as ICommand;
                 if (command != null && command.CanExecute(element.GetValue(CommandParameterProperty)))
-                {
                     command.Execute(element.GetValue(CommandParameterProperty));
-                }
             }
         }
     }

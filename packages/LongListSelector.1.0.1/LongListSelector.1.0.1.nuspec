@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>LongListSelector</id>
+    <version>1.0.1</version>
+    <title>LongListSelector for Windows Phone 7.5</title>
+    <authors>Yimeng Wu</authors>
+    <owners>Yimeng Wu</owners>
+    <iconUrl>https://raw.github.com/Kinnara/Media/master/NuGet/WindowsPhone.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This package provides the enhanced LongListSelector control for Windows Phone 7.5, with the same API as the Windows Phone 8 LongListSelector.
+
+This is not the Windows Phone toolkit LongListSelector.
+
+Main advantages:
+Supports full data and UI virtualization
+Supports grouped grid layout
+Better performance</description>
+    <summary>Enhanced LongListSelector for Windows Phone 7.5. Supports grouped grid layout.</summary>
+    <language>en-US</language>
+    <tags>longlistselector lls listbox windowsphone wp7 wp7dev phone controls mango</tags>
+  </metadata>
+</package>

@@ -4,24 +4,35 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:my="clr-namespace:CloudEmoticon"
     xmlns:lib="clr-namespace:Simon.Library.Controls"
     xmlns:cmd="clr-namespace:NaveenDhaka"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" Loaded="AppPage_Loaded">
+    shell:SystemTray.BackgroundColor="#FF4CBEE8" AppTitle="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
+    Loaded="AppPage_Loaded">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideDownFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideUpFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
 
     <lib:AppPage.Resources>
         <DataTemplate x:Key="GroupHeaderTemplate">
-            <Border Background="{StaticResource PhoneAccentBrush}" BorderThickness="0" Margin="15,15,0,0"
-                    HorizontalAlignment="Left">
-                <TextBlock Text="{Binding Name}" Foreground="{StaticResource PhoneForegroundBrush}" 
+            <Border Background="{StaticResource PhoneAccentBrush}" BorderThickness="0" Margin="15,15,0,0" HorizontalAlignment="Left">
+                <TextBlock Text="{Binding Name}" Foreground="White" 
                            FontSize="24" Margin="20,15,25,15" FontFamily="{StaticResource PhoneFontFamilySemiLight}"
                            HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Border>
@@ -76,24 +87,15 @@
 
     <phone:Pivot
         x:Name="pivot"
-        Title="{Binding LocalizedResources.ApplicationTitle, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
-        Margin="0,-18,0,0" SelectionChanged="pivot_SelectionChanged">
-        <phone:PivotItem x:Name="recentPage" Margin="0">
-            <phone:PivotItem.Header>
-                <TextBlock 
-                    Text="{Binding LocalizedResources.Recent, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
-                    FontSize="44"/>
-            </phone:PivotItem.Header>
+        SelectionChanged="pivot_SelectionChanged"
+        HeaderTemplate="{StaticResource HeaderTemplate}">
+        <phone:PivotItem x:Name="recentPage" Margin="12, 0" Header="{Binding LocalizedResources.Recent, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
             <phone:LongListSelector 
                 x:Name="RecentSelector"
+                ItemsSource="{Binding RecentList}"
                 ItemTemplate="{StaticResource ItemTemplate}"/>
         </phone:PivotItem>
-        <phone:PivotItem Margin="0">
-            <phone:PivotItem.Header>
-                <TextBlock 
-                    Text="{Binding LocalizedResources.Favorite, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
-                    FontSize="44"/>
-            </phone:PivotItem.Header>
+        <phone:PivotItem Margin="12, 0" Header="{Binding LocalizedResources.Favorite, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
             <Grid>
                 <TextBlock
                     x:Name="ListEmptyLabel" 
@@ -101,18 +103,15 @@
                     Text="{Binding LocalizedResources.ListEmpty, Mode=OneWay, Source={StaticResource LocalizedStrings}}" />
                 <phone:LongListSelector 
                     x:Name="FavoriteSelector"
+                    ItemsSource="{Binding FavoriteList}"
                     ItemTemplate="{StaticResource ItemTemplate}"/>
             </Grid>
         </phone:PivotItem>
-        <phone:PivotItem Margin="0">
-            <phone:PivotItem.Header>
-                <TextBlock 
-                    Text="{Binding LocalizedResources.Repositories, Mode=OneWay, Source={StaticResource LocalizedStrings}}"
-                    FontSize="44"/>
-            </phone:PivotItem.Header>
+        <phone:PivotItem Margin="12, 0" Header="{Binding LocalizedResources.Repositories, Mode=OneWay, Source={StaticResource LocalizedStrings}}">
             <phone:LongListSelector
                 x:Name="EmoticonSelector" IsGroupingEnabled="True"
                 GroupHeaderTemplate="{StaticResource GroupHeaderTemplate}" 
+                ItemsSource="{Binding EmoticonList}"
                 ItemTemplate="{StaticResource ItemTemplate}"
                 JumpListStyle="{StaticResource JumpListStyle}"/>
         </phone:PivotItem>

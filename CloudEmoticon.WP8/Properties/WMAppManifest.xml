@@ -2,9 +2,10 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
   <Languages xmlns="">
-    <Language code="zh-Hans" />
+    <Language code="zh-CN" />
+    <Language code="en-US" />
   </Languages>
-  <App xmlns="" ProductID="{eab91d06-7e35-4dc1-876c-220ba5da115f}" Title="Cloud Emoticon" RuntimeType="Silverlight" Version="1.0.1.0" Genre="apps.normal" Author="Simon Chan" Description="Cloud emoticon, as its name, is a useful cloud-based emoticon dictionary." Publisher="Simon Software" PublisherID="{95a335a9-004d-4e71-9812-8ba0228f938d}">
+  <App xmlns="" ProductID="{eab91d06-7e35-4dc1-876c-220ba5da115f}" Title="@AppResLib.dll,-100" RuntimeType="Silverlight" Version="1.0.4.0" Genre="apps.normal" Author="Simon Chan" Description="Cloud emoticon, as its name, is a useful cloud-based emoticon dictionary." Publisher="Simon Software" PublisherID="{95a335a9-004d-4e71-9812-8ba0228f938d}">
     <IconPath IsRelative="true" IsResource="false">Images\logo.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -18,7 +19,8 @@
           <SmallImageURI IsRelative="true" IsResource="false">Images\logo.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Images\logo.png</BackgroundImageURI>
-          <Title>Cloud Emoticon</Title>
+          <Title>
+          </Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>
@@ -32,6 +34,10 @@
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
+    <Extensions>
+      <Protocol Name="cloudemoticon" NavUriFragment="encodedLaunchUri=%s" TaskID="_default" />
+      <Protocol Name="cloudemoticons" NavUriFragment="encodedLaunchUri=%s" TaskID="_default" />
+    </Extensions>
     <ScreenResolutions>
       <ScreenResolution Name="ID_RESOLUTION_WVGA" />
       <ScreenResolution Name="ID_RESOLUTION_WXGA" />

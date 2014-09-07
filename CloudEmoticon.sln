@@ -1,26 +1,35 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudEmoticon.WP8", "CloudEmoticon.WP8\CloudEmoticon.WP8.csproj", "{FD31E015-B3D3-4F12-90D2-03B6EE964F62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudEmoticon.WIN", "CloudEmoticon.WIN\CloudEmoticon.WIN.csproj", "{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs12
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = CloudEmoticon.WP8\\CloudEmoticon.WP8.csproj
-		SccProjectName1 = CloudEmoticon.WP8
-		SccLocalPath1 = CloudEmoticon.WP8
+		SccProjectUniqueName1 = CloudEmoticon.WIN\\CloudEmoticon.WIN.csproj
+		SccProjectName1 = CloudEmoticon.WIN
+		SccLocalPath1 = CloudEmoticon.WIN
+		SccProjectUniqueName2 = CloudEmoticon.WP8\\CloudEmoticon.WP8.csproj
+		SccProjectName2 = CloudEmoticon.WP8
+		SccLocalPath2 = CloudEmoticon.WP8
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|Win32 = Debug|Win32
 		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|Win32 = Release|Win32
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -30,6 +39,12 @@ Global
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|ARM.ActiveCfg = Debug|ARM
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|ARM.Build.0 = Debug|ARM
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|ARM.Deploy.0 = Debug|ARM
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|Win32.ActiveCfg = Debug|x86
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|Win32.Build.0 = Debug|x86
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|Win32.Deploy.0 = Debug|x86
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|x86.ActiveCfg = Debug|x86
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|x86.Build.0 = Debug|x86
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Debug|x86.Deploy.0 = Debug|x86
@@ -39,9 +54,29 @@ Global
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|ARM.ActiveCfg = Release|ARM
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|ARM.Build.0 = Release|ARM
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|ARM.Deploy.0 = Release|ARM
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|Win32.ActiveCfg = Release|x86
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|Win32.Build.0 = Release|x86
+		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|Win32.Deploy.0 = Release|x86
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|x86.ActiveCfg = Release|x86
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|x86.Build.0 = Release|x86
 		{FD31E015-B3D3-4F12-90D2-03B6EE964F62}.Release|x86.Deploy.0 = Release|x86
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Release|ARM.ActiveCfg = Release|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Release|Win32.ActiveCfg = Release|Any CPU
+		{4D443672-C20B-4C99-BBC4-1F1DAB96E0E5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,10 +1,11 @@
 ﻿<Application
-    x:Class="CloudEmoticon.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:my="clr-namespace:CloudEmoticon" >
+    xmlns:my="clr-namespace:CloudEmoticon" xmlns:Primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
+    x:Class="CloudEmoticon.App"
+    >
 
     <!--Application Resources-->
     <Application.Resources>
@@ -19,6 +20,10 @@
         <my:RateCommand x:Key="RateCommand" />
         <my:FeedbackCommand x:Key="FeedbackCommand" />
         <my:EnableToVisibilityConverter x:Key="EnableToVisibilityConverter"/>
+        
+        <DataTemplate x:Key="HeaderTemplate">
+            <TextBlock Text="{Binding}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+        </DataTemplate>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

@@ -163,7 +163,7 @@ Load default repositoriy?</value>
     <value>Settings</value>
   </data>
   <data name="DefaultList" xml:space="preserve">
-    <value>https://dl.dropboxusercontent.com/u/120725807/test.xml</value>
+    <value>http://chensi.moe/JapaneseEmoticons.xml</value>
   </data>
   <data name="AddFavorite" xml:space="preserve">
     <value>Add to favorite</value>
@@ -269,5 +269,41 @@ Load default repositoriy?</value>
   </data>
   <data name="WrongFormat" xml:space="preserve">
     <value>Wrong file format</value>
+  </data>
+  <data name="AddResposityComfirm" xml:space="preserve">
+    <value>Do you want to add {0} to resposities list?</value>
+  </data>
+  <data name="CloudEmoticonStore" xml:space="preserve">
+    <value>http://emoticon.moe/gotostore.html</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>more</value>
+  </data>
+  <data name="NoPromptHint" xml:space="preserve">
+    <value>You can add default respository in settings later.</value>
+  </data>
+  <data name="AboutFeedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="AboutLine1" xml:space="preserve">
+    <value>Project &amp; Android version:</value>
+  </data>
+  <data name="AboutLine2" xml:space="preserve">
+    <value>Kanade Tachibana</value>
+  </data>
+  <data name="AboutLine3" xml:space="preserve">
+    <value>iOS version:</value>
+  </data>
+  <data name="AboutLine4" xml:space="preserve">
+    <value>Yashi Kagurazaka</value>
+  </data>
+  <data name="AboutLine5" xml:space="preserve">
+    <value>Windows Phone version:</value>
+  </data>
+  <data name="AboutLine6" xml:space="preserve">
+    <value>Simon Chan</value>
+  </data>
+  <data name="AboutRate" xml:space="preserve">
+    <value>Rate in store</value>
   </data>
 </root>

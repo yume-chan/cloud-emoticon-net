@@ -1,0 +1,144 @@
+﻿<lib:AppPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:lib="clr-namespace:Simon.Library.Controls"
+    xmlns:cmd="clr-namespace:NaveenDhaka"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:longListSelector="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.LongListSelector"
+    x:Class="CloudEmoticon.SettingPage"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    shell:SystemTray.BackgroundColor="#4CBEE8" 
+    AppTitle="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideUpFadeIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideDownFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <phone:Pivot x:Name="pivot" HeaderTemplate="{StaticResource HeaderTemplate}" SelectionChanged="pivot_SelectionChanged">
+        <phone:PivotItem Margin="0" Header="{Binding LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}">
+            <StackPanel>
+                <TextBlock
+					Text="{Binding LocalizedResources.UpdateWhen, Source={StaticResource LocalizedStrings}}" 
+					FontSize="{StaticResource PhoneFontSizeMedium}" 
+					Margin="12,12,12,0" />
+                <toolkit:ListPicker
+					x:Name="updateWhenPicker" SelectionChanged="updateWhenPicker_SelectionChanged">
+                    <toolkit:ListPickerItem Content="{Binding LocalizedResources.Manual, Source={StaticResource LocalizedStrings}}" />
+                    <toolkit:ListPickerItem Content="{Binding LocalizedResources.EveryStart, Source={StaticResource LocalizedStrings}}" />
+                    <toolkit:ListPickerItem Content="{Binding LocalizedResources.EveryDay, Source={StaticResource LocalizedStrings}}" />
+                    <toolkit:ListPickerItem Content="{Binding LocalizedResources.EveryThreeDays, Source={StaticResource LocalizedStrings}}" />
+                    <toolkit:ListPickerItem Content="{Binding LocalizedResources.EveryWeek, Source={StaticResource LocalizedStrings}}" />
+                </toolkit:ListPicker>
+                <toolkit:ToggleSwitch
+					x:Name="updateWiFiSwitch"
+					Content="{Binding LocalizedResources.UpdateOnWiFi, Source={StaticResource LocalizedStrings}}"
+					Checked="updateWiFiSwitch_Checked" 
+					Unchecked="updateWiFiSwitch_Unchecked"/>
+                <Button
+					x:Name="clearRecentButton"
+					Content="{Binding LocalizedResources.ClearRecent, Source={StaticResource LocalizedStrings}}" 
+					Click="clearRecentButton_Click" />
+            </StackPanel>
+        </phone:PivotItem>
+        <phone:PivotItem Margin="0" Header="{Binding LocalizedResources.Repositories, Source={StaticResource LocalizedStrings}}">
+            <Grid>
+                <Grid x:Name="ListEmptyLabel" Grid.Row="1" Margin="35,0" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock
+						VerticalAlignment="Center" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Center"
+						Text="{Binding LocalizedResources.NoRepositories, Source={StaticResource LocalizedStrings}}" />
+                    <Button 
+						Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Padding="40,8"
+						Content="{Binding LocalizedResources.OK, Source={StaticResource LocalizedStrings}}" 
+						Tap="LoadButton_Tap"/>
+                </Grid>
+                <longListSelector:LongListSelectorEx
+					x:Name="ResponsitoriesSelector" 
+					Grid.Row="1" Margin="12,0,12,0">
+                    <longListSelector:LongListSelectorEx.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="{StaticResource PhoneBorderBrush}" BorderThickness="0,0,0,5">
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu
+                                        cmd:CommandExecuter.OnEvent="Opened"
+                                        cmd:CommandExecuter.Command="{StaticResource RefreshDataCommand}"
+                                        cmd:CommandExecuter.CommandParameter="{Binding RelativeSource={RelativeSource Self}}" >
+                                        <toolkit:MenuItem 
+                                            Header="{Binding LocalizedResources.Remove, Source={StaticResource LocalizedStrings}}"
+                                            FontFamily="{StaticResource PhoneFontFamilyNormal}" 
+                                            Command="{StaticResource RemoveRepositoryCommand}"
+                                            CommandParameter="{Binding URL}"/>
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+                                <Grid Background="Transparent">
+                                    <TextBlock Text="{Binding Info}" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="30" Margin="15,15,0,25"/>
+                                    <TextBlock Text="{Binding URL}"
+                                               Margin="15,0,0,0" FontSize="24" VerticalAlignment="Bottom"  HorizontalAlignment="Left"
+                                               FontFamily="{StaticResource PhoneFontFamilySemiLight}"
+                                               Foreground="{StaticResource PhoneDisabledBrush}" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </longListSelector:LongListSelectorEx.ItemTemplate>
+                </longListSelector:LongListSelectorEx>
+            </Grid>
+        </phone:PivotItem>
+        <phone:PivotItem Margin="0" Header="{Binding LocalizedResources.About, Source={StaticResource LocalizedStrings}}">
+            <StackPanel>
+                <TextBlock 
+					Text="{Binding LocalizedResources.AboutLine1, Source={StaticResource LocalizedStrings}}" Margin="0,30,0,0"
+					FontSize="{StaticResource PhoneFontSizeLarge}" HorizontalAlignment="Center"/>
+                <TextBlock
+					Text="{Binding LocalizedResources.AboutLine2, Source={StaticResource LocalizedStrings}}" Margin="0,20,0,0"
+					FontSize="{StaticResource PhoneFontSizeMediumLarge}" HorizontalAlignment="Center" />
+                <TextBlock 
+					Text="{Binding LocalizedResources.AboutLine3, Source={StaticResource LocalizedStrings}}" Margin="0,30,0,0"
+					FontSize="{StaticResource PhoneFontSizeLarge}" HorizontalAlignment="Center" />
+                <TextBlock
+					Text="{Binding LocalizedResources.AboutLine4, Source={StaticResource LocalizedStrings}}" Margin="0,20,0,0"
+					FontSize="{StaticResource PhoneFontSizeMediumLarge}" HorizontalAlignment="Center" />
+                <TextBlock 
+					Text="{Binding LocalizedResources.AboutLine5, Source={StaticResource LocalizedStrings}}" Margin="0,30,0,0"
+					FontSize="{StaticResource PhoneFontSizeLarge}" HorizontalAlignment="Center" />
+                <TextBlock
+					Text="{Binding LocalizedResources.AboutLine6, Source={StaticResource LocalizedStrings}}" Margin="0,20,0,0"
+					FontSize="{StaticResource PhoneFontSizeMediumLarge}" HorizontalAlignment="Center" />
+                <HyperlinkButton 
+					Content="{Binding LocalizedResources.AboutRate, Source={StaticResource LocalizedStrings}}"
+                    Margin="0,50,0,0" FontSize="{StaticResource PhoneFontSizeMediumLarge}" 
+					cmd:CommandExecuter.OnEvent="Tap" cmd:CommandExecuter.Command="{StaticResource RateCommand}"/>
+                <HyperlinkButton 
+					Content="{Binding LocalizedResources.AboutFeedback, Source={StaticResource LocalizedStrings}}" 
+                    Margin="0,30,0,0" FontSize="{StaticResource PhoneFontSizeMediumLarge}" 
+					cmd:CommandExecuter.OnEvent="Tap" cmd:CommandExecuter.Command="{StaticResource FeedbackCommand}"/>
+            </StackPanel>
+        </phone:PivotItem>
+    </phone:Pivot>
+
+    <lib:AppPage.AppBar>
+        <lib:AppBar>
+            <lib:AppBarIconButton 
+                Text="{Binding LocalizedResources.Add, Source={StaticResource LocalizedStrings}}" 
+                IconUri="/Images/add.png"
+                Click="AppBarAddButton_Click"/>
+        </lib:AppBar>
+    </lib:AppPage.AppBar>
+</lib:AppPage>
